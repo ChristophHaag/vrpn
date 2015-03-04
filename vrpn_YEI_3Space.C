@@ -339,10 +339,14 @@ void vrpn_YEI_3Space::handle_report(unsigned char *report)
   // If not, there is trouble parsing the report.  Sometimes the wired
   // unit gets the wrong number of bytes in the report, causing things
   // to wrap around.  This catches that case.
+  /// @todo Temporarily disabled - some sensors always report -200,
+  /// even in the software from YEI
+#if 0
   if (channel[9] <= 1) {
 	  VRPN_MSG_ERROR("vrpn_YEI_3Space::handle_report(): Invalid temperature, resetting");
 	  d_sensor = STATUS_RESETTING;
   }
+#endif
 
   // Check the confidence factor to make sure it is between 0 and 1.
   // If not, there is trouble parsing the report.  Sometimes the wired
